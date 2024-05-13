@@ -28,7 +28,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	_ = storage
 }
 
 func setupLogger(env string) *slog.Logger {
