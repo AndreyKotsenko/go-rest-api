@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"rest-api/internal/config"
+	"rest-api/internal/http-server/handlers/redirect"
 	"rest-api/internal/http-server/handlers/url/save"
 	"rest-api/internal/lib/logger/sl"
 	"rest-api/internal/storage/sqlite"
@@ -41,6 +42,7 @@ func main() {
 	router.Use(middleware.URLFormat)
 
 	router.Post("/url", save.New(log, storage))
+	router.Get("/{alias}", redirect.New(log, storage))
 
 	log.Info("starting server", slog.String("address", cfg.Address))
 
